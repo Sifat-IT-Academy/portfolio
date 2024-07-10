@@ -37,3 +37,17 @@ class Blog(models.Model,HitCountMixin):
 
     def __str__(self):
         return f"{self.title} by {self.author}"
+    
+
+
+class PortfolioCategory(models.Model):
+    name = models.CharField(max_length=50)
+    def __str__(self):
+        return f"{self.name}"
+    
+class Portfolio(models.Model):
+    image = models.ImageField(upload_to='portfolio/images')
+    category = models.ForeignKey(PortfolioCategory,on_delete=models.CASCADE)
+    url = models.URLField()
+    new_date = models.DateField(auto_now=True)
+    title = models.CharField(max_length=70)
